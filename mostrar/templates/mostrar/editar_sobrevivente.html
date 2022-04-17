@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZSSN</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="">ZSSN</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		  <ul class="navbar-nav">
+			<li class="nav-item active">
+			  <a class="nav-link" href="http://127.0.0.1:8000/">Sobreviventes <span class="sr-only">(Página atual)</span></a>
+			</li>
+			<li class="nav-item active">
+			  <a class="nav-link" href="http://127.0.0.1:8000/itens">Itens</a>
+			</li>
+			<li class="nav-item active">
+			  <a class="nav-link" href="http://127.0.0.1:8000/relatorios/">Relatorios</a>
+			</li>
+		  </ul>
+		</div>
+	  </nav>
+
+</head>
+<body>
+    <div class="row">
+    <div class="col-md-5" style="    margin-left: auto; margin-right: auto;  display: block;">
+        <h1>Editar sobrevivente</h1>
+        <div id="valor" hidden>{{ id }}</div>
+
+            <div class="conteiner">
+                <form method="post" id="insert_form">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Nome</label>
+                        <div class="col-sm-10">
+                            <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome do sobrevivente">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Idade</label>
+                        <div class="col-sm-10">
+                            <input name="idade" type="text" class="form-control" id="idade" placeholder="Descrição da etapa">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Sexo</label>
+                        <div class="col-sm-10">
+                            <input name="sexo" type="text" class="form-control" id="sexo" placeholder="Descrição da etapa">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Latitude</label>
+                        <div class="col-sm-10">
+                            <input name="latitude" type="text" class="form-control" id="latitude" placeholder="Descrição da etapa">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Longitude</label>
+                        <div class="col-sm-10">
+                            <input name="longitude" type="text" class="form-control" id="longitude" placeholder="Descrição da etapa">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Infectado</label>
+                        <div class="col-sm-10">
+                            <label  class="form-control" id="infectado" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Flags</label>
+                        <div class="col-sm-10">
+                            <label  class="form-control" id="flags" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row" >
+                        <div class="col-sm-5">
+                            <input type="submit" name="CadUser" id="CadUser" value="Atualizar" class="btn  btn-outline-primary">
+                        </div>
+                        <div class="col-sm-5">
+                            <input   value="Acusar infecção" class="btn  btn-outline-primary" onclick="acusarinfeccao()">
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+ 
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-5" style="    margin-left: auto; margin-right: auto; display: block; ">
+            <h1>Inventario</h1>
+                <div class="form-group row" id="item">
+
+                </div>
+                </div>
+            </div>
+        
+    <script>
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+        var id = document.getElementById('valor').innerText;
+        
+        // recebe dados atraves de uma chamada de API vira url cadastrada para ppulação de informações
+        function receberdados(){
+            console.log(id);
+
+            var url = `http://127.0.0.1:8000/sobreviventes/sobrevivente/${id}/`
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data){
+                var list = data;
+                document.getElementById('nome').value = list.nome_sobrevivente
+                document.getElementById('idade').value = list.idade_sobrevivente
+                document.getElementById('sexo').value = list.sexo_sobrevivente
+                document.getElementById('latitude').value = list.latitude_sobrevivente
+                document.getElementById('longitude').value = list.longitude_sobrevivente
+                document.getElementById('infectado').innerHTML = list.infectato
+                document.getElementById('flags').innerHTML  = list.flags_infectado
+                        
+            })
+
+
+        }
+        
+        function recarregaritens(){
+            var item = document.getElementById('item')
+
+            var url = `http://127.0.0.1:8000/sobreviventes/sobreviventesitens/${id}/`
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data){
+                console.log(data)
+
+                var list_intens = data;
+
+                for(var i in list_intens){
+
+                    var itens = `
+                            <div class="form-group col-sm-5">
+                                <label>Item </label>
+                                <label  class="form-control" id="item" >${list_intens[i].item.nome_item}</label>
+                            </div>
+                            <div class="form-group col-sm-5">
+                                <label>Quantidade </label>
+                                <label  class="form-control" id="quantidade" >${list_intens[i].qtd}</label>
+                            </div>
+                    `
+                    item.innerHTML += itens
+                }
+                        
+            })
+        }
+		receberdados()
+        recarregaritens()
+        var form = document.getElementById('insert_form')
+        form.addEventListener('submit', function(e){
+            e.preventDefault()
+            var url = `http://127.0.0.1:8000/sobreviventes/atualizarsobrevivente/${id}/`
+
+
+            var nome = document.getElementById('nome').value
+            var idade = document.getElementById('idade').value
+            var sexo = document.getElementById('sexo').value
+            var latitude = document.getElementById('latitude').value
+            var longitude = document.getElementById('longitude').value
+            var infectado = document.getElementById('infectado').innerHTML 
+            var flags = document.getElementById('flags').innerHTML 
+
+
+            fetch(url, {
+                method:'POST',
+                headers:{
+                    'content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({
+                                    'sobreviventes_id':id,
+                                    'nome_sobrevivente':nome,
+                                    'idade_sobrevivente': idade,
+                                    'sexo_sobrevivente': sexo,
+                                    'latitude_sobrevivente': latitude,
+                                    'longitude_sobrevivente': longitude,
+                                    'infectato': infectado,
+                                    'flags_infectado': flags
+                                    })
+            }
+            ).then(function(response){
+                receberdados()
+                $('#addUsuarioModal').modal('hide');
+			    document.getElementById('insert_form').reset()            })
+        })
+
+        function acusarinfeccao(){
+            var url = `http://127.0.0.1:8000/sobreviventes/atualizarsobrevivente/${id}/`
+
+
+            var nome = document.getElementById('nome').value
+            var idade = document.getElementById('idade').value
+            var sexo = document.getElementById('sexo').value
+            var latitude = document.getElementById('latitude').value
+            var longitude = document.getElementById('longitude').value
+            var infectado = document.getElementById('infectado').innerHTML 
+            var flags = document.getElementById('flags').innerHTML  
+            var flagint = parseInt(flags)
+            flagint += 1
+
+            console.log(flagint)
+
+            if (flagint >= 3){
+                infectado = true;
+            }
+
+            fetch(url, {
+                method:'POST',
+                headers:{
+                    'content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({
+                                    'sobreviventes_id':id,
+                                    'nome_sobrevivente':nome,
+                                    'idade_sobrevivente': idade,
+                                    'sexo_sobrevivente': sexo,
+                                    'latitude_sobrevivente': latitude,
+                                    'longitude_sobrevivente': longitude,
+                                    'infectato': infectado,
+                                    'flags_infectado': flagint
+                                    })
+            }
+            ).then(function(response){
+                receberdados()
+                $('#addUsuarioModal').modal('hide');
+			    document.getElementById('insert_form').reset()
+            })
+        }
+    </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

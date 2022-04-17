@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZSSN - sobreviventes</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="">ZSSN</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+		  <ul class="navbar-nav">
+			<li class="nav-item active">
+			  <a class="nav-link" href="http://127.0.0.1:8000/">Sobreviventes <span class="sr-only">(Página atual)</span></a>
+			</li>
+			<li class="nav-item active">
+			  <a class="nav-link" href="http://127.0.0.1:8000/itens">Itens</a>
+			</li>
+			<li class="nav-item active">
+			  <a class="nav-link" href="http://127.0.0.1:8000/relatorios/">Relatorios</a>
+			</li>
+		  </ul>
+		</div>
+	  </nav>
+
+</head>
+<body>
+	<br>
+	<div class="container form-group row"  id="porcentagem" style="margin-left: auto; margin-right: auto;  display: block; ">
+		<h1>Relatorios</h1>
+	</div>
+
+	<br>
+	<br>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+	<script>
+		var porcentagem = document.getElementById('porcentagem');
+
+		var infectados = 0
+		var naoinfectados = 0
+		var total = 0
+		function mediaSobreviventes(){
+
+				url = 'http://127.0.0.1:8000/sobreviventes/'
+				fetch(url)
+				.then((resp) => resp.json())
+				.then(function(data){
+					var list = data;
+					for(var i in list){
+						if(list[i].infectato == true){
+							infectados += 1
+						}else{
+							naoinfectados += 1
+						}
+				}
+				console.log('Infectados = ', infectados)
+				console.log('Não infectados = ', naoinfectados)
+				total = infectados + naoinfectados;
+				infectadospct = (infectados * 100)/total
+				naoinfectadospct = (naoinfectados * 100)/total
+
+				console.log('Infectados = ', infectadospct)
+
+				var valores = `
+						<div class=" row" style="margin-left: auto; margin-right: auto;   background-color: blanchedalmond;>
+							<div class="col-md-5">
+								<h2>Porcentagem de sobreviventes infectados</h2>
+							</div>
+							<div class="form-group col-sm-5">
+                                <h3>Total de Sobreviventes: ${total}</h3>
+                            </div>
+                            <div class="form-group col-sm-5">
+                                <h3>Infectados: ${infectadospct}%</h3>
+                            </div>
+                            <div class="form-group col-sm-5">
+                                <h3>Não infectados: ${naoinfectadospct}%</h3>
+                            </div>
+						</div>
+                    		`
+                    porcentagem.innerHTML += valores
+			})
+		}
+		mediaSobreviventes()
+
+		qtdagua = 0
+		qtdalimento = 0
+		qtmedicacao = 0
+		qtmunicao = 0
+		function mediaitens(){
+			url = 'http://127.0.0.1:8000/sobreviventes/sobreviventesitens/'
+			fetch(url)
+				.then((resp) => resp.json())
+				.then(function(data){
+					console.log(data)
+					var list = data;
+
+					for(var i in list){
+						if(list[i].item.nome_item == "Água"){
+							qtdagua += list[i].qtd
+						}if(list[i].item.nome_item == "Alimentação"){
+							qtdalimento += list[i].qtd
+						}if(list[i].item.nome_item == "Medicação"){
+							qtmedicacao += list[i].qtd
+						}if(list[i].item.nome_item == "Munição"){
+							qtmunicao += list[i].qtd
+						}
+					}
+					console.log(qtdagua, qtdalimento, qtmedicacao, qtmunicao)
+					mediaagua = qtdagua/total
+					mediaalimento = qtdalimento/total
+					mediamedicacao = qtmedicacao/total
+					mediamunicao = qtmunicao/total
+
+					var valores = `
+					<div class=" row" style="margin-left: auto; margin-right: auto;   background-color: blanchedalmond;>
+							<div class="col-md-5">
+								<h2>Media de itens por sobrevivente</h2>
+							</div>
+							<div class="form-group col-sm-5">
+                                <h3>${mediaagua} Água por sobrevivente</h3>
+                            </div>
+							<div class="form-group col-sm-5">
+                                <h3>${mediaalimento} Alimento por sobrevivente</h3>
+                            </div>
+							<div class="form-group col-sm-5">
+                                <h3>${mediamedicacao} Medicação por sobrevivente</h3>
+                            </div>
+							<div class="form-group col-sm-5">
+                                <h3>${mediamunicao} Munição por sobrevivente</h3>
+                            </div>
+						</div>
+
+                    		`
+                    porcentagem.innerHTML += valores
+
+				})
+		}
+		mediaitens()
+
+		var pontos = 0
+
+		function pontosperdidos(){
+			url = 'http://127.0.0.1:8000/sobreviventes/sobreviventesitens/'
+			fetch(url)
+				.then((resp) => resp.json())
+				.then(function(data){
+					console.log(data)
+					var list = data;
+
+					for(var i in list){
+						if(list[i].sobrevivente.nome_item == "Água" && list[i].sobrevivente.infectato == true){
+							pontos += list[i].qtd *5
+						}if(list[i].item.nome_item == "Alimentação" && list[i].sobrevivente.infectato == true){
+							pontos+= list[i].qtd *4
+						}if(list[i].item.nome_item == "Medicação" && list[i].sobrevivente.infectato == true){
+							pontos+= list[i].qtd *3
+						}if(list[i].item.nome_item == "Munição" && list[i].sobrevivente.infectato == true){
+							pontos+= list[i].qtd *2
+						}
+					}
+
+					var valores = `
+					<div class=" row" style="margin-left: auto; margin-right: auto;   background-color: blanchedalmond;>
+							<div class="col-md-5">
+								<h2>Pontos perdidos</h2>
+							</div>
+							<div class="form-group col-sm-5">
+                                <h3>${pontos} Pontos perdidos</h3>
+                            </div>
+						</div>
+
+                    		`
+                    porcentagem.innerHTML += valores
+
+				})
+		}
+		pontosperdidos()
+	</script>
+</body>
+</html>
