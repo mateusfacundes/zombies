@@ -21,7 +21,7 @@ def adicionarSobrevivente(request):
     if sobreviventes_srl.is_valid():
         sobreviventes_srl.save()
         sobrevivente = Sobreviventes.objects.last()
-
+        
         print(sobrevivente)
         for item in itens:
             itemBd = Inventario.objects.get(pk=item['inventario_id'])

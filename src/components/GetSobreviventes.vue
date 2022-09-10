@@ -40,19 +40,19 @@
   
   export default {
 
-    name: "GetPage",
-  
-    data() {
-      return {
-        sobreviventes: [],
-      };
-    },
+      name: "GetSobreviventes",
+    
+      data() {
+        return {
+          sobreviventes: [],
+        };
+      },
 
-    mounted () {
-    axios
-      .get('http://localhost:8000/sobreviventes/')
-      .then(response => (this.sobreviventes = response.data))
-  }
+      mounted () {
+      axios
+        .get('http://localhost:8000/sobreviventes/')
+        .then(response => (this.sobreviventes = response.data))
+      }
 
     
   }
