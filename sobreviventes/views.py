@@ -4,10 +4,12 @@ from django.http.response import JsonResponse
 
 from sobreviventes.models import Sobreviventes, Inventario, Sobreviventesinventario
 from sobreviventes.serializers import SobreviventesSerializer, inventarioSerializer, SobreviventesinventarioSerializer
+from django.views.decorators.csrf import csrf_exempt
 
 #Sobreviventes
 
 #Metodo para adicionar sobreviventes e inventario através da relação many to many 
+@csrf_exempt 
 def adicionarSobrevivente(request):
     sobrevivente_data = JSONParser().parse(request)
     sobreviventes_srl = SobreviventesSerializer(data = sobrevivente_data)
@@ -30,18 +32,21 @@ def adicionarSobrevivente(request):
     return JsonResponse('Falha ao Adicionado Sobrevivente', safe=False)
 
 #Mostrar todos sobreviventes
+@csrf_exempt 
 def mostrarSobreviventes(request):
     sobreviventes = Sobreviventes.objects.all()
     sobreviventes_srl = SobreviventesSerializer(sobreviventes, many=True)
     return JsonResponse(sobreviventes_srl.data, safe=False)
 
 #Mostrar sobrevivente filtrado por ID
+@csrf_exempt
 def mostrarSobrevivente(request, rid):
 	sobrevivente = Sobreviventes.objects.get(sobreviventes_id = rid)
 	sobreviventes_srl = SobreviventesSerializer(sobrevivente, many=False)
 	return JsonResponse(sobreviventes_srl.data, safe=False)
 
 #Atualizar sobrevivente
+@csrf_exempt
 def atualizarSobrevivente(request, rid):
     sobrevivente_data = JSONParser().parse(request)
     sobrevivente = Sobreviventes.objects.get(sobreviventes_id = rid)
@@ -52,6 +57,7 @@ def atualizarSobrevivente(request, rid):
     return JsonResponse('Falha ao atualizar Sobrevivente', safe=False)
 
 #Deletar sobrevivente
+@csrf_exempt
 def deletarSobrevivente(request, rid):
     sobrevivente = Sobreviventes.objects.get(sobreviventes_id = rid)
     sobrevivente.delete()
@@ -60,6 +66,7 @@ def deletarSobrevivente(request, rid):
 
 #Itens
 #Adicionar itens
+@csrf_exempt
 def adicionarItens(request):
     item_data = JSONParser().parse(request)
     itens_srl = inventarioSerializer(data = item_data)
@@ -69,18 +76,21 @@ def adicionarItens(request):
     return JsonResponse('Falha ao Adicionado item', safe=False)
 
 #Mostrar itens todos
+@csrf_exempt
 def mostrarItens(request):
     items = Inventario.objects.all()
     itens_srl = inventarioSerializer(items, many=True)
     return JsonResponse(itens_srl.data, safe=False)
 
 #Mostrar item filtrado por ID
+@csrf_exempt
 def mostrarItem(request, rid):
 	item = Inventario.objects.get(inventario_id = rid)
 	itens_srl = inventarioSerializer(item, many=False)
 	return JsonResponse(itens_srl.data, safe=False)
 
 #Atualizar item
+@csrf_exempt
 def atualizarItens(request, rid):
     item_data = JSONParser().parse(request)
     item = Inventario.objects.get(items_id = rid)
@@ -91,6 +101,7 @@ def atualizarItens(request, rid):
     return JsonResponse("Falha ao Adicionado item", safe=False)
 
 #Deletar sobrevivente
+@csrf_exempt
 def deletarItens(request, rid):
     item = Inventario.objects.get(inventario_id = rid)
     item.delete()
@@ -98,11 +109,12 @@ def deletarItens(request, rid):
 
 #Items Sobreviventes
 #Mostrar relações many to many intes e sobreviventes
+@csrf_exempt
 def mostrarSobreviventesinventarios(request):
     sobreviventesItens_data = Sobreviventesinventario.objects.all()
     sobreviventesItens_srl = SobreviventesinventarioSerializer(sobreviventesItens_data, many=True)
     return JsonResponse(sobreviventesItens_srl.data, safe=False)
-
+@csrf_exempt
 def mostrarSobreviventeinventario(request, rid):
 	Sobreviventeinventario = Sobreviventesinventario.objects.filter(sobrevivente_id = rid)
 	Sobreviventeinventario_srl = SobreviventesinventarioSerializer(Sobreviventeinventario, many=True)
