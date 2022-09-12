@@ -1,24 +1,23 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <CreateSobreviventes/>
-    <br>
     <center>
-      <GetSobreviventes/>
+      <CreateSobreviventes/>
     </center>
+    
+    <br>
+
     
   </div>
 </template>
 
 <script>
-import GetSobreviventes from './components/GetSobreviventes.vue'
 import CreateSobreviventes from './components/CreateSobreviventes.vue'
 
 
 export default {
   name: 'App',
   components: {
-    GetSobreviventes,
     CreateSobreviventes
   }
 }
