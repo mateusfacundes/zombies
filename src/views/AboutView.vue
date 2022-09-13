@@ -1,69 +1,73 @@
 <template>
-    <h2>Adicionar Sobrevivente</h2>
-
-    <div class="row col-md-12 center">
-        <form  @submit.prevent="handleSubmit">
-          <div class="row">
-            <div class="form-group " >
+   <section>
+    
+      <h2>Adicionar Sobrevivente</h2>
+      <div class="conteiner">
+        <div class="row col-md-12 center">
+            <form  @submit.prevent="handleSubmit">
+              <div class="row">
+                <div class="form-group " >
+                      <input
+                      type="text"
+                      placeholder="Nome"
+                      v-model="nome_sobrevivente"
+                      />
+                </div>
+                <div class="form-group">
+                    <input
+                      
+                      type="text"
+                      placeholder="Idade"
+                      v-model="idade_sobrevivente"
+                    />
+                </div>
+                <div class="form-group" >
+                  <select   class="form-control form-control-sm" v-model="sexo_sobrevivente">
+                        <option value="">Sexo</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="feminino">feminino</option>
+                  </select>
+                </div>
+                <div class="form-group " >
                   <input
-                  type="text"
-                  placeholder="Nome"
-                  v-model="nome_sobrevivente"
+                    type="text"
+                    placeholder="latitude"
+                    v-model="latitude_sobrevivente"
                   />
-            </div>
-            <div class="form-group">
-                <input
-                  
-                  type="text"
-                  placeholder="Idade"
-                  v-model="idade_sobrevivente"
-                />
-            </div>
-            <div class="form-group" >
-              <select   class="form-control form-control-sm" v-model="sexo_sobrevivente">
-                    <option value="">Sexo</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="feminino">feminino</option>
-              </select>
-            </div>
-            <div class="form-group " >
-              <input
-                type="text"
-                placeholder="latitude"
-                v-model="latitude_sobrevivente"
-              />
-            </div>
-            <div class="form-group ">
-              <input
-                type="text"
-                placeholder="Longitude"
-                v-model="longitude_sobrevivente"
-              />
-            </div>
-          </div>
-          <button @click="tamanhoBotao" class="btn btn" type="button">+ Itens</button>
-          <button @click="input--" class="btn btn" type="button" >- Itens</button>
+                </div>
+                <div class="form-group ">
+                  <input
+                    type="text"
+                    placeholder="Longitude"
+                    v-model="longitude_sobrevivente"
+                  />
+                </div>
+              </div>
+              <button @click="tamanhoBotao" class="btn btn" type="button">+ Itens</button>
+              <button @click="input--" class="btn btn" type="button" >- Itens</button>
 
-          <div v-for="i in input" v-bind:key="i" class="row">
-            <div class="form-group " >
-              <select :id="'seletor'+i" class="form-control form-control-sm" >
-                <option value="">Escolha um item</option>
-                <option v-for="item in itensmostrar" :value="item.inventario_id" v-bind:key="item">{{ item.nome_item }}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <input :id="'qtd'+i"
-                type="text"
-                placeholder="Quantidade"
-                
-              />
-            </div>
+              <div v-for="i in input" v-bind:key="i" class="row">
+                <div class="form-group " >
+                  <select :id="'seletor'+i" class="form-control form-control-sm" >
+                    <option value="">Escolha um item</option>
+                    <option v-for="item in itensmostrar" :value="item.inventario_id" v-bind:key="item">{{ item.nome_item }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input :id="'qtd'+i"
+                    type="text"
+                    placeholder="Quantidade"
+                    
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <button class="btn-search">Adicionar sobrevivente</button>
+              </div>
+            </form>
           </div>
-          <div class="form-group row">
-            <button class="btn-search">Adicionar sobrevivente</button>
-          </div>
-        </form>
       </div>
+    </section>
 </template>
 
 <script>

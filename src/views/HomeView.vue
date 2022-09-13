@@ -25,7 +25,7 @@
                 <td>{{ sobrevivente.latitude_sobrevivente }}</td>
                 <td>{{ sobrevivente.longitude_sobrevivente }}</td>
                 <td>{{ sobrevivente.infectato }}</td>
-                <td><button class="btn btn-info">editar</button></td>
+                <router-link :to="'/product/'+sobrevivente.sobreviventes_id" ><td><button class="btn btn-info">editar</button></td></router-link>
               </tr>
             </tbody>
           </table>
