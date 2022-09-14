@@ -2,7 +2,7 @@
    <section>
     
       <h2>Adicionar Sobrevivente</h2>
-      <div class="conteiner">
+      <div class="conteiner register">
         <div class="row col-md-12 center">
             <form  @submit.prevent="handleSubmit">
               <div class="row">
@@ -61,8 +61,9 @@
                   />
                 </div>
               </div>
-              <div class="form-group row">
-                <button class="btn-search">Adicionar sobrevivente</button>
+              <br>
+              <div class="botao form-group row">
+                <button class="btn-search btn btn-outline-success">Adicionar sobrevivente</button>
               </div>
             </form>
           </div>
@@ -154,3 +155,21 @@
 
   
 </script>
+
+
+<style>
+  .register{
+    height: 900px;
+  }
+  .conteiner{
+    padding: 20px;
+  }
+  .form-group{
+    padding: 5px;
+  }
+  .botao{
+    margin: auto;
+    width:60%;
+    padding: 10px;
+  }
+</style>

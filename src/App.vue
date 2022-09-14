@@ -1,9 +1,10 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-  </nav>
-  <div class="conteiner"> 
+   <div class="conteiner"> 
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/register">Registrar</router-link> |
+      
+    </nav>
     <router-view/>
   </div>
   
@@ -11,11 +12,14 @@
 
 <style>
   .conteiner{
+    background-color: white;
     margin: auto;
     width:60%;
     padding: 10px;
   }
   #app {
+    height: 100%;
+    background-color: #2c3e50;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
