@@ -14,10 +14,7 @@ Requisições para a API devem seguir os padrões:
 
 # Sobreviventes [/sobreviventes]
 
-Os sobreviventes seguem o mesmo padrão mostrando apenas: Nome, idade, sexo, latitude, longitude e se está infectado.
-
-
-### Listar (List) [GET]
+### Lista de todos sobreviventes [GET]
 
 + Request (application/json)
 
@@ -26,6 +23,16 @@ Os sobreviventes seguem o mesmo padrão mostrando apenas: Nome, idade, sexo, lat
         
             {
                 {
+                    "sobreviventes_id": 35, 
+                    "nome_sobrevivente": "Mateus", 
+                    "idade_sobrevivente": 24, 
+                    "sexo_sobrevivente": "Masculino", 
+                    "latitude_sobrevivente": 123.0, 
+                    "longitude_sobrevivente": 123.0, 
+                    "infectato": false, "flags_infectado": 0
+                },
+                {
+                    "sobreviventes_id": 36, 
                     "nome_sobrevivente": "Carlos",
                     "idade_sobrevivente": 31,
                     "sexo_sobrevivente": "Masculino",
@@ -34,23 +41,34 @@ Os sobreviventes seguem o mesmo padrão mostrando apenas: Nome, idade, sexo, lat
                     "infectado": false,
                     "flags_infectado": 0,
                 },
-                {
-                    "sobreviventes_id": 35, 
-                    "nome_sobrevivente": "Mateus", 
-                    "idade_sobrevivente": 24, 
-                    "sexo_sobrevivente": "Masculino", 
-                    "latitude_sobrevivente": 123.0, 
-                    "longitude_sobrevivente": 123.0, 
-                    "infectato": false, "flags_infectado": 0
-                }
 
+            }
+
+# Sobrevivente [/sobrevivente/sobrevivente/:id]
+
+### Conseguir informações de um sobrevivente [GET]
+
++ Request (application/json)
+
+
++ Response 200 (application/json)
+        
+            {
+                "sobreviventes_id": 35, 
+                "nome_sobrevivente": "Mateus", 
+                "idade_sobrevivente": 24, 
+                "sexo_sobrevivente": "Masculino", 
+                "latitude_sobrevivente": 123.0, 
+                "longitude_sobrevivente": 123.0, 
+                "infectato": false, "flags_infectado": 0
+            
             }
 
 
 
-# Adicionar Sobreviventes [/sobreviventes/adicionarsobrevivente]
+# Atualizar Sobreviventes [/sobreviventes/atualizarsobrevivente/:id]
 
-### Novo (Create) [POST]
+### Atualizar um novo sobrevivente [POST]
 
 + Attributes (object)
 
@@ -74,6 +92,54 @@ Os sobreviventes seguem o mesmo padrão mostrando apenas: Nome, idade, sexo, lat
               "latitude_sobrevivente": 541.2,
               "infectado": false,
               "flags_infectado": 0,
+            }
+
++ Response 200 (application/json) 
+
+    + Body
+
+            {
+                "data": "Sobrevivente atualizado com sucesso!",
+            }
+
+
+# Adicionar Sobreviventes [/sobreviventes/adicionarsobrevivente]
+
+### Cadastrar um novo sobrevivente [POST]
+
++ Attributes (object)
+
+    + nome_sobrevivente: Nome do Sobrevivente
+    + idade_sobrevivente: Idade do sobrevivente
+    + sexo_sobrevivente: Sexo do sobrevivente
+    + latitude_sobrevivente: latitude do sobrevivente
+    + longitude_sobrevivente: longitude do sobrevivente
+    + infectado: Estado de infecção do sobrevivente
+    + flags_infectado: Quantidade de alertas do sobrevivente
+    + itens: Lista com id dos items e suas respectivas quantidades
+
++ Request (application/json)
+
+    + Body
+
+            {
+              "nome_sobrevivente": "Carlos",
+              "idade_sobrevivente": 31,
+              "sexo_sobrevivente": "Masculino",
+              "latitude_sobrevivente": 120.2,
+              "latitude_sobrevivente": 541.2,
+              "infectado": false,
+              "flags_infectado": 0,
+              "itens": {
+                {
+                    "inventario_id": 1,
+                    "qtd": 2
+                },
+                {
+                    "inventario_id": 3,
+                    "qtd": 1
+                }
+              }
             }
 
 + Response 200 (application/json) 
