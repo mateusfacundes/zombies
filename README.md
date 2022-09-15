@@ -196,7 +196,7 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-# Dependencias Django
+# Dependências Django
 
 + rest_framework
 + corsheaders
