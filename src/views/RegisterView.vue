@@ -1,5 +1,5 @@
 <template>
-   <section>
+   <section class="registromae">
     
       <h2>Adicionar Sobrevivente</h2>
       <div class="conteiner register">
@@ -158,6 +158,7 @@
 
 
 <style>
+
   .register{
     height: 900px;
   }

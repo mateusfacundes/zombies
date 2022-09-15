@@ -5,18 +5,25 @@
       <router-link to="/register">Registrar</router-link> |
       
     </nav>
-    <router-view/>
+    <div class="conteudo">
+      <router-view/>
+    </div>
+    
   </div>
   
 </template>
 
 <style>
+
   .conteiner{
+    min-height: 100vh;
+    height: 100%;
     background-color: white;
     margin: auto;
     width:60%;
     padding: 10px;
   }
+
   #app {
     height: 100%;
     background-color: #2c3e50;

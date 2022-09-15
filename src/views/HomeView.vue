@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="homemae">
       <h2>Sobreviventes</h2>
       <div class="conteiner">
         <div class="row col-md-6 center">
@@ -14,6 +14,7 @@
                 <th scope="col">Latitude</th>
                 <th scope="col">Longitude</th>
                 <th scope="col">Infectado</th>
+                <th scope="col">Alertas</th>
                 <th>-</th>
               </tr>
             </thead>
@@ -25,7 +26,8 @@
                 <td>{{ sobrevivente.latitude_sobrevivente }}</td>
                 <td>{{ sobrevivente.longitude_sobrevivente }}</td>
                 <td>{{ sobrevivente.infectato }}</td>
-                <router-link :to="'/product/'+sobrevivente.sobreviventes_id" ><td><button class="btn btn-info">editar</button></td></router-link>
+                <td>{{ sobrevivente.flags_infectado }}</td>
+                <td><router-link :to="'/product/'+sobrevivente.sobreviventes_id" ><button class="btn btn-outline-info">editar</button></router-link></td>
               </tr>
             </tbody>
           </table>
@@ -56,7 +58,7 @@
     },
   
   };
+</script>
+<style>
 
-
-  
-  </script>
+</style>
