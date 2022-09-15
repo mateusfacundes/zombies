@@ -22,7 +22,6 @@ def adicionarSobrevivente(request):
         sobreviventes_srl.save()
         sobrevivente = Sobreviventes.objects.last()
         
-        print(sobrevivente)
         for item in itens:
             itemBd = Inventario.objects.get(pk=item['inventario_id'])
             qtd = item['qtd']
@@ -63,6 +62,7 @@ def deletarSobrevivente(request, rid):
     sobrevivente.delete()
     return JsonResponse('Sobrevivente deletado com sucesso', safe=False)
 
+#Relatorios
 @csrf_exempt 
 def relatorioSobreviventes(request):
     qtd_infectados = 0
@@ -107,8 +107,17 @@ def relatorioSobreviventes(request):
     media_alimentacao = qtd_alimentacao/len(sobreviventes)
     media_medicacao = qtd_medicacao/len(sobreviventes)
     media_municao = qtd_municao/len(sobreviventes)
+
+    data = {
+        'porcentagem_infectados':porcentagem_infectados,
+        'porcentagem_nao_infectados': 100-porcentagem_infectados,
+        'media_aguas': media_aguas,
+        'media_alimentacao': media_alimentacao,
+        'media_medicacao': qtd_medicacao,
+        'media_municao': media_municao,
+        'pontos_perdidos': pontos_perdidos
+    }
     
-    data = [('porcentagem_infectados', porcentagem_infectados), ('porcentagem_nao_infectados', 100-porcentagem_infectados), ('media_aguas', media_aguas), ('media_alimentacao', media_alimentacao), ('media_medicacao', qtd_medicacao), ('media_municao',media_municao), ('pontos_perdidos', pontos_perdidos)]
     return JsonResponse(data, safe=False)
 
 

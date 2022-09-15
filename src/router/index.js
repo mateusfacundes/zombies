@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegisterView from '../views/RegisterView.vue'
-import Edit from '../views/Edit.vue'
+import EditView from '../views/EditView.vue'
+import RelatorioView from '../views/RelatorioView.vue'
+import TrocasView from '../views/TrocasView.vue'
+
+
 
 
 const routes = [
@@ -12,11 +16,19 @@ const routes = [
   },
   { 
     path: '/product/:id', 
-    component: Edit 
+    component: EditView 
   },
   { 
     path: '/register', 
     component: RegisterView 
+  },
+  { 
+    path: '/relatorios', 
+    component: RelatorioView 
+  },
+  { 
+    path: '/trocas', 
+    component: TrocasView
   },
 ]
 

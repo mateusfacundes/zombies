@@ -7,7 +7,7 @@ urlpatterns = [
 	path('adicionarsobrevivente/', views.adicionarSobrevivente),
     path('atualizarsobrevivente/<str:rid>/', views.atualizarSobrevivente),
 	path('deletarsobrevivente/<str:rid>/', views.deletarSobrevivente),
-    path('relatorio', views.relatorioSobreviventes),
+    path('relatorio/', views.relatorioSobreviventes),
     
     path('itens', views.mostrarItens),
     path('itens/<str:rid>/', views.mostrarItem),
