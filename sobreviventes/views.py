@@ -102,11 +102,11 @@ def relatorioSobreviventes(request):
             else:
                 pontos_perdidos += lista.qtd * 3
 
-    porcentagem_infectados = (qtd_infectados*100)/len(sobreviventes)
-    media_aguas = qtd_aguas/len(sobreviventes)
-    media_alimentacao = qtd_alimentacao/len(sobreviventes)
-    media_medicacao = qtd_medicacao/len(sobreviventes)
-    media_municao = qtd_municao/len(sobreviventes)
+    porcentagem_infectados = round((qtd_infectados*100)/len(sobreviventes), 2)
+    media_aguas = round(qtd_aguas/len(sobreviventes), 2)
+    media_alimentacao = round(qtd_alimentacao/len(sobreviventes), 2)
+    media_medicacao = round(qtd_medicacao/len(sobreviventes), 2)
+    media_municao = round(qtd_municao/len(sobreviventes), 2)
 
     data = {
         'porcentagem_infectados':porcentagem_infectados,

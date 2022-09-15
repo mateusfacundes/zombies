@@ -4,7 +4,6 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/register">Registrar</router-link> |
       <router-link to="/relatorios">Relatorios</router-link> |
-      <router-link to="/trocas">Trocas</router-link> 
 
     </nav>
     <div class="conteudo">

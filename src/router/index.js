@@ -3,10 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import EditView from '../views/EditView.vue'
 import RelatorioView from '../views/RelatorioView.vue'
-import TrocasView from '../views/TrocasView.vue'
-
-
-
 
 const routes = [
   {
@@ -26,10 +22,7 @@ const routes = [
     path: '/relatorios', 
     component: RelatorioView 
   },
-  { 
-    path: '/trocas', 
-    component: TrocasView
-  },
+
 ]
 
 const router = createRouter({
