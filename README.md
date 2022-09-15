@@ -150,6 +150,26 @@ Requisições para a API devem seguir os padrões:
                 "data": "Sobrevivente adicionado com sucesso!",
             }
 
+# Relatorio [/sobreviventes/relatorio]
+
+### Informações do relatório [GET]
+
++ Request (application/json)
+
+
++ Response 200 (application/json)
+        
+            {
+                "porcentagem_infectados": 33.33, 
+                "porcentagem_nao_infectados": 66.67, 
+                "media_aguas": 42.17, 
+                "media_alimentacao": 21.17, 
+                "media_medicacao": 12, 
+                "media_municao": 2.5, 
+                "pontos_perdidos": 44
+            }
+
+            
 
 # Zombies
 
@@ -175,3 +195,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# Dependencias Django
+
++ rest_framework
++ corsheaders
