@@ -92,7 +92,7 @@
         }
         axios
           .put('http://127.0.0.1:8000/sobreviventes/atualizarsobrevivente/'+this.$route.params.id+'/', this.sobreviventes)
-          .then(response => (window.alert(response.data)))
+          .then(response => (window.alert('+ 1 flag para este sobrevivente'), response))
         
       }
     },

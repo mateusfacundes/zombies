@@ -63,6 +63,54 @@ def deletarSobrevivente(request, rid):
     sobrevivente.delete()
     return JsonResponse('Sobrevivente deletado com sucesso', safe=False)
 
+@csrf_exempt 
+def relatorioSobreviventes(request):
+    qtd_infectados = 0
+
+    qtd_aguas = 0
+    qtd_alimentacao = 0
+    qtd_medicacao = 0
+    qtd_municao = 0
+
+    pontos_perdidos = 0
+
+    sobreviventes = Sobreviventes.objects.all()
+    sobreviventesItens_data = Sobreviventesinventario.objects.all()
+
+    for sobrevivente in sobreviventes:
+        if sobrevivente.infectato == True:
+            qtd_infectados += 1
+    for lista in sobreviventesItens_data:
+        if lista.item.nome_item == 'Água':
+            if lista.sobrevivente.infectato == False:
+                qtd_aguas += lista.qtd
+            else:
+                pontos_perdidos += lista.qtd * 4
+        if lista.item.nome_item == 'Alimentação':
+            if lista.sobrevivente.infectato == False:
+                qtd_alimentacao += lista.qtd
+            else:
+                pontos_perdidos += lista.qtd * 3
+        if lista.item.nome_item == 'Medicação':
+            if lista.sobrevivente.infectato == False:
+                qtd_medicacao += lista.qtd
+            else:
+                pontos_perdidos += lista.qtd * 3
+        if lista.item.nome_item == 'Munição':
+            if lista.sobrevivente.infectato == False:
+                qtd_municao += lista.qtd
+            else:
+                pontos_perdidos += lista.qtd * 3
+
+    porcentagem_infectados = (qtd_infectados*100)/len(sobreviventes)
+    media_aguas = qtd_aguas/len(sobreviventes)
+    media_alimentacao = qtd_alimentacao/len(sobreviventes)
+    media_medicacao = qtd_medicacao/len(sobreviventes)
+    media_municao = qtd_municao/len(sobreviventes)
+    
+    data = [('porcentagem_infectados', porcentagem_infectados), ('porcentagem_nao_infectados', 100-porcentagem_infectados), ('media_aguas', media_aguas), ('media_alimentacao', media_alimentacao), ('media_medicacao', qtd_medicacao), ('media_municao',media_municao), ('pontos_perdidos', pontos_perdidos)]
+    return JsonResponse(data, safe=False)
+
 
 #Itens
 #Adicionar itens
