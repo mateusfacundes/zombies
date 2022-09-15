@@ -33,9 +33,9 @@ Requisições para a API devem seguir os padrões:
                 },
                 {
                     "sobreviventes_id": 36, 
-                    "nome_sobrevivente": "Carlos",
-                    "idade_sobrevivente": 31,
-                    "sexo_sobrevivente": "Masculino",
+                    "nome_sobrevivente": "Sabrina",
+                    "idade_sobrevivente": 22,
+                    "sexo_sobrevivente": "Feminino",
                     "latitude_sobrevivente": 120.2,
                     "latitude_sobrevivente": 541.2,
                     "infectado": false,
