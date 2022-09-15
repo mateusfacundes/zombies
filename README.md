@@ -23,7 +23,7 @@ Os sobreviventes seguem o mesmo padrão mostrando apenas: Nome, idade, sexo, lat
 
 
 + Response 200 (application/json)
-        {
+        
             {
                 "sobreviventes_id": 35, 
                 "nome_sobrevivente": "Mateus", 
@@ -33,18 +33,8 @@ Os sobreviventes seguem o mesmo padrão mostrando apenas: Nome, idade, sexo, lat
                 "longitude_sobrevivente": 123.0, 
                 "infectato": false, "flags_infectado": 0
             }
-            ,
-            {
-                "sobreviventes_id": 36, 
-                "nome_sobrevivente": "Antonio Santos", 
-                "idade_sobrevivente": 23, 
-                "sexo_sobrevivente": "Masculino", 
-                "latitude_sobrevivente": 123.0, 
-                "longitude_sobrevivente": 123.0, 
-                "infectato": false, 
-                "flags_infectado": 0
-            }
-        }
+
+
 
 # Adicionar Sobreviventes [/sobreviventes/adicionarsobrevivente]
 
