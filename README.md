@@ -25,13 +25,25 @@ Os sobreviventes seguem o mesmo padrão mostrando apenas: Nome, idade, sexo, lat
 + Response 200 (application/json)
         
             {
-                "sobreviventes_id": 35, 
-                "nome_sobrevivente": "Mateus", 
-                "idade_sobrevivente": 24, 
-                "sexo_sobrevivente": "Masculino", 
-                "latitude_sobrevivente": 123.0, 
-                "longitude_sobrevivente": 123.0, 
-                "infectato": false, "flags_infectado": 0
+                {
+                    "nome_sobrevivente": "Carlos",
+                    "idade_sobrevivente": 31,
+                    "sexo_sobrevivente": "Masculino",
+                    "latitude_sobrevivente": 120.2,
+                    "latitude_sobrevivente": 541.2,
+                    "infectado": false,
+                    "flags_infectado": 0,
+                },
+                {
+                    "sobreviventes_id": 35, 
+                    "nome_sobrevivente": "Mateus", 
+                    "idade_sobrevivente": 24, 
+                    "sexo_sobrevivente": "Masculino", 
+                    "latitude_sobrevivente": 123.0, 
+                    "longitude_sobrevivente": 123.0, 
+                    "infectato": false, "flags_infectado": 0
+                }
+
             }
 
 
